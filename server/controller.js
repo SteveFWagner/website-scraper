@@ -3,26 +3,16 @@ const request = require('request')
 
 module.exports={
     websiteInput: (req,res)=>{
-        console.log(req.body)
-        const {url} = req.body
+        const {url} = req.body //bringing in the url from front end on the request
         request(url, (error, response, html) => {
-            // console.log(111,response.statusCode)
-            // console.log(222,typeof response.statusCode)
-            if(!error && response.statusCode === 200){
-                // console.log(html)
-                const $ = cheerio.load(html)
-                // console.log($)
-                // const container = $('.summary')
-                // const title = container.children('h3').text()
-                // console.log(title)
-                const titlesArray = []
-                $('.summary h3').each((i,el)=>{
-                    const title = $(el).text()
-                    titlesArray.push(title)
-                    // console.log(title)
+            if(!error && response.statusCode === 200){ //making sure the url we are hitting is successful before continuing
+                const $ = cheerio.load(html) //loading the webpage's html into cheerio and assigning it a veriable
+                const titlesArray = [] //establishing an array we will later use in our response to the front end
+                $('.summary h3').each((i,el)=>{ //looping over each h3 inside of a 'summary' class
+                    const title = $(el).text() //assigning the text in the h3 to a variable
+                    titlesArray.push(title) //pushing the variable into the response array
                 })
-                // console.log(titlesArray)
-                res.status(200).send(titlesArray)
+                res.status(200).send(titlesArray) //responding with the array
             }else{
                 res.sendStatus(500)
             }

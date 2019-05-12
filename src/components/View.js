@@ -3,6 +3,8 @@ import axios from 'axios'
 
 import List from './List/List'
 
+//View is the main container for all other components
+//scraping is initiated with the Submit button
 class View extends Component {
     constructor(props){
         super(props)
@@ -12,7 +14,7 @@ class View extends Component {
         }
     }
 
-    handleInput = (prop,val) => {
+    handleInput = (prop,val) => { 
         this.setState({
             [prop]:val
         })
@@ -31,7 +33,6 @@ class View extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <div className='view-container'>
                 <h1>Want to see Stack Overflow's recent posts?</h1>
