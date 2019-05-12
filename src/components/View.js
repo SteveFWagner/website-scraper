@@ -32,6 +32,18 @@ class View extends Component {
         .catch(err => console.log(err))
     }
 
+    handleGetLinks = () => {
+        const {url} = this.state
+        axios.post('/api/websiteInputWithLinks',{url})
+        .then(res => {
+            console.log(res)
+            this.setState({
+                titles:res.data
+            })
+        })
+        .catch(err => console.log(err))
+    }
+
     render() {
         return (
             <div className='view-container'>
@@ -47,6 +59,9 @@ class View extends Component {
                 <br/>
                 <button onClick={this.handleSubmit}>
                     Submit
+                </button>
+                <button onClick={this.handleGetLinks}>
+                    Get Links
                 </button>
                 <List titles={this.state.titles}/>
             </div>

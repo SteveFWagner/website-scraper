@@ -10,9 +10,30 @@ module.exports={
                 const titlesArray = [] //establishing an array we will later use in our response to the front end
                 $('.summary h3').each((i,el)=>{ //looping over each h3 inside of a 'summary' class
                     const title = $(el).text() //assigning the text in the h3 to a variable
-                    titlesArray.push(title) //pushing the variable into the response array
+                    titlesArray.push({title}) //pushing the variable into the response array
                 })
                 res.status(200).send(titlesArray) //responding with the array
+            }else{
+                res.sendStatus(500)
+            }
+        })
+    },
+    websiteInputWithLinks: (req,res)=>{
+        const {url} = req.body
+        request(url, (error, response, html) => {
+            if(!error && response.statusCode === 200){ 
+                const $ = cheerio.load(html) 
+                const titlesAndLinks = []
+                $('.summary h3 a').each((i,el)=>{ 
+                    const link = $(el).attr('href') 
+                    const title = $(el).text()
+                    const post ={
+                        title,
+                        link
+                    }
+                    titlesAndLinks.push(post) 
+                })
+                res.status(200).send(titlesAndLinks)
             }else{
                 res.sendStatus(500)
             }
