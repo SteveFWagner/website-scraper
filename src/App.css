@@ -17,7 +17,7 @@ h1{
   background:none;
   height:2em;
   width:50vw;
-  color:white;
+  color:#F50357;
   font-size: 20px;
   font-family: monospace;
 }
@@ -33,6 +33,10 @@ button{
 .list-item{
   border:white 1px solid;
   margin:5px;
+}
+
+a{
+  color:#F50357
 }
 
 #list-container{
