@@ -25,7 +25,7 @@ module.exports={
                 const $ = cheerio.load(html) 
                 const titlesAndLinks = []
                 $('.summary h3 a').each((i,el)=>{ 
-                    const link = $(el).attr('href') 
+                    const link = $(el).attr('href') //assigning the value of the href to a variable
                     const title = $(el).text()
                     const post ={
                         title,

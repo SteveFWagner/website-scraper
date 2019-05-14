@@ -44,6 +44,7 @@ class View extends Component {
         .catch(err => console.log(err))
     }
 
+
     render() {
         return (
             <div className='view-container'>
@@ -63,6 +64,7 @@ class View extends Component {
                 <button onClick={this.handleGetLinks}>
                     Get Links
                 </button>
+
                 <List titles={this.state.titles}/>
             </div>
         );
